@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import userRoutes from './user.routes'
+import profileRoutes from './profile.routes'
 
 const app = Router();
 
-app.use('/contracts', userRoutes);
+app.use('/contracts', profileRoutes);
 
 export default app;

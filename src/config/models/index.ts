@@ -1,5 +1,6 @@
 import sequelize from "../db"
 import Profile from "./profile.model";
+import Contract from "./contract.model";
 
 const databaseConnection = () => {
     sequelize.sync({ alter: true }).then(() => {
@@ -9,4 +10,4 @@ const databaseConnection = () => {
       });
 };
 
-export { Profile, databaseConnection};
+export { Contract, Profile, databaseConnection};
