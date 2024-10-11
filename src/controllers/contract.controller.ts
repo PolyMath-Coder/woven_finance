@@ -5,7 +5,6 @@ import {
     FindAContractById, 
     FindAllClientContracts, 
     FindAllContractorContracts, 
-    FindContractById 
 } from "../services/contract.service";
 import StatusCodes from "../utils/status.codes";
 import { UserRoleEnum } from '../utils/enums';
@@ -16,7 +15,6 @@ export const CreateContract = async (
     res: Response
 ): Promise<void> => {
 
-   console.log(req.user)
    const data = await CreateAContract(req.user.profile_id, req.body);
     res.status(StatusCodes.SuccessCreated).json({
         status: true,
