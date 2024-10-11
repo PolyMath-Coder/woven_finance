@@ -13,7 +13,6 @@ export const userAuthentication = async (
 	try {
 		
 		 const profile_id: any  = req.headers.profile_id;
-		 console.log(req.headers);
 		 if(profile_id == null || profile_id == undefined) {
 				return res.status(StatusCodes.ClientErrorUnauthorized).json({
 				status: false,
@@ -21,7 +20,6 @@ export const userAuthentication = async (
 				data: null,
 			});
 		 }
-		 console.log(profile_id);
 		 if(typeof profile_id === 'string') {
 			const profile = await FindUserById(profile_id) as ProfileInfo
 			req.user = {

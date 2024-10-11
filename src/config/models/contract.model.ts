@@ -25,6 +25,14 @@ Contract.init({
         type: DataTypes.STRING,
         allowNull: false
     },
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    description: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     amount: {
         type: DataTypes.FLOAT,
         allowNull: false
