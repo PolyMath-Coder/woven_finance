@@ -20,7 +20,7 @@ app.get('/', (req: Request, res: Response) => {
 
 
 
-app.listen(3001, async () => {
+app.listen(PORT, async () => {
     await databaseConnection()
     console.log(`server now live at port ${PORT}`)
 })
