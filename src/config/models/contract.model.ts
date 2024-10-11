@@ -2,6 +2,8 @@ import { DataTypes, Model, UUIDV4 } from "sequelize";
 import { v4 as uuidV4 } from 'uuid';
 import sequelize from "../db";
 import { ContractStatusEnum } from "../../utils/enums";
+import Profile from "./profile.model";
+import { UUID } from "crypto";
 
 
 class Contract extends Model {
@@ -24,8 +26,8 @@ Contract.init({
         allowNull: false,
     },
     client: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: DataTypes.UUID,
+        allowNull: false,
     },
     title: {
         type: DataTypes.STRING,

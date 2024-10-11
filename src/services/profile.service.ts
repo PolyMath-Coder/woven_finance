@@ -30,7 +30,7 @@ export const SeedAllUsers = async () => {
         {
             name: 'Kevin Hart',
             email: 'johndoe@gmail.com',
-            user_role: UserRoleEnum.CLIENT
+            user_role: UserRoleEnum.CONTRACTOR
         }
      ])
      return users;

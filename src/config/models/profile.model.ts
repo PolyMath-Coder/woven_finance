@@ -1,6 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../db";
 import { v4 as uuidV4 } from 'uuid';
+import Contract from "./contract.model";
 
 
 class Profile extends Model { 
@@ -38,5 +39,6 @@ Profile.init({
   sequelize,
   tableName: 'profiles',
 });
+
 
 export default Profile;

@@ -7,6 +7,7 @@ const config = {
       user: process.env.DB_USER || 'root',
       password: process.env.DB_PASS || '',
       name: process.env.DB_NAME || 'woven',
+      port: process.env.DB_PORT || 15263
     },
     server: {
       port: process.env.PORT || 3000,
