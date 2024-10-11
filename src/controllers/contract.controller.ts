@@ -8,6 +8,7 @@ import {
 } from "../services/contract.service";
 import StatusCodes from "../utils/status.codes";
 import { UserRoleEnum } from '../utils/enums';
+import { Profile } from '../config/models';
 
 
 export const CreateContract = async (
@@ -72,6 +73,5 @@ export const RetrieveContract = async (
             data: null
         })
     }
-   
-
 };
+

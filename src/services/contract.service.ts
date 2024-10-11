@@ -1,7 +1,8 @@
 import { Op } from "sequelize";
-import { Contract } from "../config/models";
+import { Contract, Profile } from "../config/models";
 import { ContractData } from "../utils/interface";
 import { ContractStatusEnum } from "../utils/enums";
+import { FindUserById } from "./profile.service";
 
 
 
@@ -110,14 +111,36 @@ export const FindContractById = async (
 ) => {
    try {
       const contract = await Contract.findByPk(contract_id)
-      if(contract == null) {
-         return {
-            status: false,
-            message: 'Oops! contract not found.'
-         }
-      }
       return contract;
    } catch(error) {
+      throw new Error(`${error.message}`)
    }
-  
+};
+
+export const PayForAJob = async (
+   job_id: string,
+   profile_id: string,
+   client_balance: number
+) => {
+   try {
+   // Query database to obtain real time info of client
+      const client = await Profile.findByPk(profile_id);
+   
+      const contract = await Contract.findByPk(job_id)
+
+      // Debit client and update write operation to Database.
+      client!.balance = client_balance - contract!.amount
+
+      await client!.save()
+
+      const contractor = await Profile.findByPk(contract!.contractor);
+      contractor!.balance = contractor!.balance + contract!.amount;
+
+      await contractor!.save();
+
+      contract!.isPaid = true;
+      await contract!.save()
+   } catch(error) {
+      throw new Error(`${error.message}`)
+   }
 };

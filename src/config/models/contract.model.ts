@@ -7,7 +7,9 @@ import { ContractStatusEnum } from "../../utils/enums";
 class Contract extends Model {
     public id!: string;
     public contractor!: string;
-    public client!: string 
+    public client!: string;
+    public amount!: number;
+    public isPaid: boolean
 }
 
 Contract.init({
