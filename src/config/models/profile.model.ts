@@ -5,8 +5,10 @@ import { v4 as uuidV4 } from 'uuid';
 
 class Profile extends Model { 
     public id!: number;
-    public name!: string;
-    public email!: string;
+    public name: string;
+    public email: string;
+    public user_role: string;
+    public balance: number;
 }
 
 Profile.init({
@@ -24,9 +26,9 @@ Profile.init({
         type: DataTypes.STRING,
         allowNull: false
     },
-    userRole: {
+    user_role: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
     },
     balance: {
         type: DataTypes.FLOAT,

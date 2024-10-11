@@ -1,17 +1,16 @@
 import type { Request as ExpressRequest, RequestHandler, Response } from 'express';
 import { Profile } from '../config/models';
 import StatusCodes from '../utils/status.codes';
-import profileService from '../services/profile.service';
-import SeedAllUsers from '../services/profile.service';
+// import profileService from '../services/profile.service';
+import { SeedAllUsers } from '../services/profile.service';
 
 export interface Request extends ExpressRequest {
     id: string;
 }
 
 export const Create = async ( req: Request, res: Response ): Promise<void> => {
-   const data = await Profile.create({ name: req.body.name, email: req.body.email})
-   console.log(data);
-  res.status(StatusCodes.SuccessOK).json({ status: true, message: 'hello all', data});
+  console.log(req.user);
+  res.status(StatusCodes.SuccessOK).json({ status: true, message: 'hello all',});
 }
 
 

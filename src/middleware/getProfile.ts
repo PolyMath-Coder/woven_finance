@@ -1,39 +1,38 @@
 import { type Request, type Response, type NextFunction } from 'express';
 import StatusCodes from '../utils/status.codes';
-// import Jwt from 'jsonwebtoken';
-
-// import config from '../config';
-// import StatusCodes from '../enums/StatusCodes';
+import { FindUserById } from '../services/profile.service';
+import { Profile } from '../config/models';
+import { ProfileInfo } from '../utils/interface';
 // import { type MerchantPayload } from '../utils/interfaces/auth.interface';
 
-export const userAuthentication = (
+export const userAuthentication = async (
 	req: Request,
 	res: Response,
 	next: NextFunction
-): any => {
+): Promise<any> => {
 	try {
-		// const key: string = String(config.KEY.SIGNING_KEY);
-		// const token: any = req.headers.authorization?.split(' ')[1];
-
-		// if (token == null) {
-		// 	return res.status(StatusCodes.ClientErrorUnauthorized).json({
-		// 		status: false,
-		// 		message: 'Invalid authentication data',
-		// 		data: null,
-		// 	});
-		// }
-
-		// const verifiedUser = Jwt.verify(String(token), key, {
-		// 	algorithms: ['HS256'],
-		// }) as MerchantPayload;
-
-		// req.merchant = {
-		// 	merchant_id: verifiedUser.merchant_id,
-		// 	full_name: verifiedUser.full_name,
-		// 	email: verifiedUser.email,
-		// };
-
-		next();
+		
+		 const profile_id: any  = req.headers.profile_id;
+		 console.log(req.headers);
+		 if(profile_id == null || profile_id == undefined) {
+				return res.status(StatusCodes.ClientErrorUnauthorized).json({
+				status: false,
+				message: 'Invalid authentication data',
+				data: null,
+			});
+		 }
+		 console.log(profile_id);
+		 if(typeof profile_id === 'string') {
+			const profile = await FindUserById(profile_id) as ProfileInfo
+			req.user = {
+				profile_id: profile_id,
+				name: profile.name,
+				email: profile.email,
+				user_role: profile.user_role,
+				balance: profile.balance
+			}
+			next();
+		 }
 	} catch (err) {
 		return res.status(StatusCodes.ClientErrorUnauthorized).json({
 			status: false,
